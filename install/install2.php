@@ -1,5 +1,5 @@
 <?php
-include('mysql.php'); //connect to database
+include('../mysql.php'); //connect to database
 mysql_connect($server, $username, $password);
 mysql_select_db($dbname);
 
@@ -13,15 +13,14 @@ if(!mysql_query($sql))
 	die("Table could not be created ".mysql_error()." <a href=\"install.php\">Back</a>");
 
 //create admin password file
-$file=fopen("admin/pass.php", "w");
+$file=fopen("../admin/pass.php", "w");
 fwrite($file, "<? \$adminpass='$_POST[password]'; ?>");
 fclose($file);
 	
-//clean up files
-unlink('index.php');
+//delete install files
 unlink('install.php');
 unlink('install2.php');
-rename('main.php', 'index.php');
+rmdir('../install');
 
 echo "Installation complete! Direct students to WWW.YOURWEBSITE.COM/DIRECTORY, control from /DIRECTORY/ADMIN";
 ?>

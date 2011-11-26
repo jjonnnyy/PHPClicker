@@ -1,13 +1,13 @@
 <?php //set up database and files for clicker
-include('mysql.php'); //include database details
+include('../mysql.php'); //include database details
 
 if (isset($_POST['server'])){ //if mysql details submitted
 	//update mysql.php file
-	$file=fopen("mysql.php", "w");
+	$file=fopen("../mysql.php", "w");
 	fwrite($file, "<? \$server = '$_POST[server]'; \$username = '$_POST[username]'; \$password = '$_POST[password]'; \$dbname = '$_POST[database]'; ?>");
 	fclose($file);
 	//test connection save result
-	include('mysql.php');
+	include('../mysql.php');
 	if(@mysql_connect($server, $username, $password) && @mysql_select_db($dbname)){
 		$mysqltest = "Connected successfully!"; $connected = true;
 	} else {
