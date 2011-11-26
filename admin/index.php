@@ -29,11 +29,18 @@ if($_POST[action]=='stop'){
 }
 
 include('../q.php');
+
+// get currenturl
+$currenturl = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+// remove "/admin/.."
+$splitar = explode("/admin/",$currenturl);
+$clickerurl = $splitar[0];
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<title>ISE Statistics Clicker</title>
+		<script src="http://www.tag.cx/qr-codes/tag-cx-qrcode.js" type="text/javascript"></script>	
 	</head>
 	<body>
 	<h1>Admin Panel</h1>
@@ -78,6 +85,7 @@ include('../q.php');
 	<input type="hidden" name="action" value="stop">
 	<p>End Question : <input type="submit" value="Stop" /></p>
 	</form>
+	<script type="text/javascript">generateQRCODE("qr","250", "http://<? echo $clickerurl;?>");</script>
 	<? } ?>
 	</body>
 </html>
