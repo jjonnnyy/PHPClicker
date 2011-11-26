@@ -2,7 +2,6 @@
 if (is_dir('install'))
 	header("Location: install/install.php");
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <?php
 include('mysql.php');//connect to database
 mysql_connect($server, $username, $password);
@@ -26,16 +25,17 @@ if (mysql_fetch_array($result))
 
 //if form has been submitted, and is valid and the question is active and the it is not an old submission, processs
 if(isset($_POST['option']) && !$hide && $active && ($_POST['time']>$time)){
-		echo "Thank you for voting. You voted  ".$_POST['option'].".";
 		//upload answer to database
-		$sql = "INSERT INTO  `rcc_underwater`.`clicker` (`ip` ,`option`) VALUES ('$_SERVER[REMOTE_ADDR]', '$_POST[option]');";
+		$sql = "INSERT INTO  `$dbname`.`clicker` (`ip` ,`option`) VALUES ('$_SERVER[REMOTE_ADDR]', '$_POST[option]');";
 		$result = mysql_query($sql);
 		//set cookie
 		setcookie('isestats', $_SERVER[REMOTE_ADDR]);
+		echo "Thank you for voting. You voted  ".$_POST['option'].".";
 		$hide=1;
 }
 
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<title>ISE Statistics Clicker</title>
