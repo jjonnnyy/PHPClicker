@@ -1,8 +1,7 @@
 <?php //check if first run, if so go to installer
 if (is_dir('install'))
 	header("Location: install/install.php");
-?>
-<?php
+
 include('mysql.php');//connect to database
 mysql_connect($server, $username, $password);
 mysql_select_db($dbname);
